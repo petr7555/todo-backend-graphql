@@ -1,4 +1,4 @@
-# Todo App backend, REST and GraphQL
+# Todo App backend - GraphQL
 
 A backend for todo apps created on codesandbox.io for the DEV blog post.
 
