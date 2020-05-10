@@ -12,9 +12,7 @@ pool.connect()
 
 const bodyParser = require('body-parser');
 app = express();
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
+app.use(bodyParser.json());
 
 app.get('/todos', async (req, res) => {
     try {
