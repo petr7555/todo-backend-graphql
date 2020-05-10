@@ -3,7 +3,8 @@ const {Pool} = require('pg');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const PORT = process.env.PORT || 5000;
+const REST_PORT = process.env.REST_PORT || 5000;
+const GQL_PORT = process.env.GQL_PORT || 7070;
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
@@ -59,7 +60,7 @@ app.post('/clear', async (req, res) => {
     }
 });
 
-app.listen(PORT, () => console.info(`Listening on ${PORT}`));
+app.listen(REST_PORT, () => console.info(`Listening on ${REST_PORT}`));
 
 
 
