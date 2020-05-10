@@ -33,7 +33,7 @@ app.post('/todos', async (req, res) => {
     const text = JSON.parse(req.body.text);
     try {
         const client = await pool.connect();
-        const queryText = 'INSERT INTO confessions(text, uid) VALUES($1, $2)';
+        const queryText = 'INSERT INTO todos(text) VALUES($1)';
         const savedTodo = await client.query(queryText, [text]);
         console.info("A todo has been saved.");
         res.send(savedTodo);
