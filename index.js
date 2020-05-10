@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const PORT = process.env.PORT || 5000;
-const GQL_PORT = process.env.GQL_PORT || 4000;
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
