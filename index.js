@@ -28,7 +28,8 @@ app.get('/todos', async (req, res) => {
 });
 
 app.post('/todos', async (req, res) => {
-    const text = JSON.parse(req.body).text;
+    const text = req.body.text;
+    console.log(text);
     try {
         const client = await pool.connect();
         const queryText = 'INSERT INTO todos(text) VALUES($1)';
