@@ -29,6 +29,34 @@ app.get('/todos', async (req, res) => {
     }
 });
 
+app.post('/todos', async (req, res) => {
+    const text = JSON.parse(req.body.text);
+    try {
+        const client = await pool.connect();
+        const queryText = 'INSERT INTO confessions(text, uid) VALUES($1, $2)';
+        const savedTodo = await client.query(queryText, [text]);
+        console.info("A todo has been saved.");
+        res.send(savedTodo);
+        client.release();
+    } catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+    }
+});
+
+app.post('/clear', async (req, res) => {
+    try {
+        const client = await pool.connect();
+        await client.query('DELETE FROM todos');
+        console.info("Todos have been deleted.");
+        res.send("Todos have been deleted");
+        client.release();
+    } catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+    }
+});
+
 app.listen(PORT, () => console.info(`Listening on ${PORT}`));
 
 
