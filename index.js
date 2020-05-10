@@ -1,6 +1,6 @@
-import * as express from "express";
-import {Pool} from "pg";
-import * as bodyParser from "body-parser";
+const express = require('express');
+const {Pool} = require('pg');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const PORT = process.env.PORT || 5000;
