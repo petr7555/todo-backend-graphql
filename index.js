@@ -1,7 +1,10 @@
-const express = require('express');
+import * as express from "express";
+import {Pool} from "pg";
+import * as bodyParser from "body-parser";
+const cors = require('cors');
+
 const PORT = process.env.PORT || 5000;
 
-const {Pool} = require('pg');
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: true
@@ -10,8 +13,8 @@ pool.connect()
     .then(client => client.query('CREATE TABLE IF NOT EXISTS todos (id SERIAL PRIMARY KEY, text TEXT)'))
     .catch(err => console.error("Couldn't create todos table.", err));
 
-const bodyParser = require('body-parser');
-app = express();
+const app = express();
+app.use(cors());
 app.use(bodyParser.json());
 
 app.get('/todos', async (req, res) => {
@@ -35,7 +38,7 @@ app.post('/todos', async (req, res) => {
         const queryText = 'INSERT INTO todos(text) VALUES($1)';
         const savedTodo = await client.query(queryText, [text]);
         console.info("A todo has been saved.");
-        res.send(savedTodo);
+        res.send(savedTodo.rows[0]);
         client.release();
     } catch (err) {
         console.error(err);
