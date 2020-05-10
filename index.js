@@ -36,7 +36,7 @@ app.post('/todos', async (req, res) => {
     console.log(text);
     try {
         const client = await pool.connect();
-        const queryText = 'INSERT INTO todos(text) VALUES($1)';
+        const queryText = 'INSERT INTO todos(text) VALUES($1) RETURNING *';
         const savedTodo = await client.query(queryText, [text]);
         console.info("A todo has been saved.");
         res.send(savedTodo.rows[0]);
@@ -60,7 +60,7 @@ app.post('/clear', async (req, res) => {
     }
 });
 
-app.listen(PORT, () => console.info(`Listening on ${PORT}`));
+app.listen(PORT, () => console.info(`Rest API Listening on ${PORT}`));
 
 
 
