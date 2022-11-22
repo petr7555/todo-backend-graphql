@@ -3,7 +3,7 @@ const { RESTDataSource } = require('apollo-datasource-rest');
 class TodoAPI extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = 'https://todo-backend-rest.herokuapp.com/';
+    this.baseURL = 'https://todo-backend-rest.onrender.com/';
   }
 
   async getTodos() {
